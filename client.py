@@ -1,5 +1,6 @@
 import pygame
 from network import Network
+import requests
 
 width = 500
 height = 500
@@ -59,7 +60,18 @@ def redrawWindow(win,player, player2):
     pygame.display.update()
 
 
+def get_actual_version():
+    response = requests.get("https://api.github.com/repos/v2ray/v2ray-core/releases")
+    json1 = response.json()
+    
+    print (json1[0]['tag_name'])
+
+
 def main():
+    print ("getting Version")
+    get_actual_version()
+
+    """
     run = True
     n = Network()
     startPos = read_pos(n.getPos())
@@ -82,5 +94,5 @@ def main():
 
         p.move()
         redrawWindow(win, p, p2)
-
+    """
 main()
